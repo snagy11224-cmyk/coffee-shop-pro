@@ -1,38 +1,57 @@
-.App {
-  text-align: center;
+/* Coffee palette + Bootstrap primary override */
+:root {
+  --coffee-950: #2b1b17;
+  --coffee-900: #3e2723;
+  --coffee-800: #4e342e;
+  --coffee-700: #5d4037;
+  --coffee-600: #6d4c41;
+  --coffee-300: #bcaaa4;
+  --coffee-200: #d7ccc8;
+  --coffee-100: #efe7e4;
+
+  /* set Bootstrap primary to a coffee tone */
+  --bs-primary: #6d4c41;
+  --bs-primary-rgb: 109, 76, 65;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body { background: #faf7f5; }
+
+.navbar .nav-link.active,
+.navbar .nav-link.show,
+.navbar .nav-link:hover { color: var(--coffee-700) !important; }
+
+.hero-section {
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    #4a2f1d 0%,
+    #5d4037 50%,
+    #3e2723 100%
+  );
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hero-image {
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+/* Sections */
+.section-muted { background: var(--coffee-100); }
 
-.App-link {
-  color: #61dafb;
+/* Buttons */
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--coffee-700);
 }
+.btn-primary:hover { background-color: var(--coffee-700); border-color: var(--coffee-800); }
+.btn-outline-light:hover { color: #000; }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Cards */
+.card { border: 0; }
+.card .card-img-top { background: var(--coffee-900); }
+
+/* Links */
+a { color: var(--coffee-700); }
+a:hover { color: var(--coffee-900); }
