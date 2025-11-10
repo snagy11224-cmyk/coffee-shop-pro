@@ -229,3 +229,34 @@ footer { background: transparent; color: var(--ink-700); }
 
 /* Optional: smoother images */
 img { image-rendering: auto; }
+
+/* make links positionable for the underline */
+.navbar .nav-link { 
+  position: relative; 
+  font-weight: 500; 
+}
+
+/* normal hover can be lighter, but NOT same as active */
+.navbar .nav-link:hover { 
+  color: var(--coffee-700); 
+}
+
+/* the actual active look */
+.navbar .nav-link.active {
+  color: var(--coffee-700) !important;
+  font-weight: 700;
+}
+
+/* elegant underline only for .active */
+.navbar .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 3px;
+  background: var(--coffee-700);
+  border-radius: 2px;
+}
+
+
