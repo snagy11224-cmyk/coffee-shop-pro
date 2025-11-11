@@ -2,6 +2,7 @@
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { NavHashLink } from "react-router-hash-link";
+import { MessageOfTheDayButton } from "./MessageOfTheDayButton";
 
 export default function Header() {
   const { pathname, hash } = useLocation();
@@ -46,7 +47,7 @@ export default function Header() {
             </li>
           </ul>
 
-          <Link to="/contact" className="btn btn-primary ms-lg-3">Reserve a table</Link>
+         <MessageOfTheDayButton className="btn-coffee ms-lg-3" />
         </div>
       </div>
     </nav>

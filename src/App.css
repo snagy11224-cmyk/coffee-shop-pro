@@ -439,3 +439,33 @@ footer .copy {
 }
 .cart-line { display: flex; gap: 12px; align-items: center; padding: 8px 0; }
 .cart-line img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
+.btn-coffee {
+  background-color: #6F4E37 !important;
+  border-color: #6F4E37 !important;
+  color: #fff !important;
+  font-weight: 600;
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  transition: 0.25s;
+}
+
+.btn-coffee:hover {
+  background-color: #5c3f2d !important;
+  border-color: #5c3f2d !important;
+  transform: translateY(-1px);
+}
+
+/* Modal background */
+.coffee-modal-backdrop {
+  background: rgba(45, 32, 23, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+/* Modal card style */
+.coffee-card {
+  background: #F8F3ED !important;
+  color: #2B1B12 !important;
+  border-radius: 14px !important;
+  border: none !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
