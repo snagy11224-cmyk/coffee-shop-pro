@@ -156,17 +156,25 @@ h1, h2, h3, .h1, .h2, .h3 { color: var(--ink-900); }
 /* ---------- Sections ---------- */
 .section-muted { background: var(--surface-2); }
 
-/* ---------- Cards ---------- */
+/* Smooth full-card hover zoom */
 .card {
-  background: var(--card-bg);
-  color: var(--card-fg);
-  border: 0;
-  box-shadow: var(--shadow-1);
+  transition: transform .35s ease, box-shadow .35s ease;
 }
-.card .card-img-top {
-  background: var(--card-img-bg);
-  object-fit: cover;
+
+.card:hover {
+  transform: scale(1.07);      /* the full card grows */
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
 }
+
+/* Keep the image nice + crisp */
+.card-img-top {
+  transition: filter .35s ease;
+}
+
+.card:hover .card-img-top {
+  filter: brightness(1.05);   /* optional slight highlight */
+}
+
 
 /* ---------- Buttons ---------- */
 .btn-primary {
