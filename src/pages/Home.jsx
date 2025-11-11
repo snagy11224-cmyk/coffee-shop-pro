@@ -2,8 +2,20 @@ import React from "react";
 import Hero from "../components/Hero";
 import Gallery from "../components/Gallery";
 import Product from "../components/Product";
+import { useEffect } from "react";
+
+const items = [
+  { label: "about", img: "/about.jpg" }
+];
+
 
 export default function Home(){
+    useEffect(() => {
+  if (window.location.pathname === "/" && !window.location.hash) {
+    window.history.replaceState(null, "", "/#hero");
+  }
+}, []);
+
   return (
     <>
       <Hero />
@@ -24,11 +36,13 @@ export default function Home(){
             </div>
             <div className="col-md-6">
               <img
-                src={`https://dummyjson.com/image/600x360/5C3A21/f6f0e8?text=${encodeURIComponent("Coffee • Beans • Vibes")}`}
-                className="img-fluid rounded-4 shadow-sm"
-                alt="Coffee beans and cup"
-                loading="lazy"
-              />
+  src={items[0].img}
+  className="img-fluid hero-image rounded-4 shadow"
+  alt={items[0].label}
+  loading="lazy"
+  width="520"
+  height="320"
+/>
             </div>
           </div>
         </div>
@@ -36,15 +50,15 @@ export default function Home(){
 
       <section id="menu" className="py-5">
         <div className="container">
-          <h3 className="mb-3">Photo Menu</h3>
-          <p className="text-muted mb-4">Placeholder images from DummyJSON—swap in your real photos anytime.</p>
+          <h3 className="mb-3">Our Menu  </h3>
+          <p className="text-muted mb-4"> </p>
           <Gallery />
         </div>
       </section>
 
       <section className="py-5 section-muted">
         <div className="container">
-          <h3 className="mb-4">Most Popular — Product Demo</h3>
+          <h3 className="mb-4">Most Popular</h3>
           <Product />
         </div>
       </section>

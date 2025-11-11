@@ -1,5 +1,10 @@
 import React from "react";
 
+const items = [
+  { label: "welcome", img: "/welcome.avif" }
+];
+
+
 export default function Hero(){
   return (
     <header id="hero" className="py-5 hero-section">
@@ -17,13 +22,15 @@ export default function Hero(){
 
           </div>
           <div className="col-lg-6 text-center">
-            <img
-              src={`https://dummyjson.com/image/520x320/5C3A21/f6f0e8?text=${encodeURIComponent("Welcome!")}`}
-              className="img-fluid hero-image rounded-4 shadow"
-              alt="Hero Illustration"
-              loading="lazy"
-              width="520" height="320"
-            />
+           <img
+  src={items[0].img}
+  className="img-fluid hero-image rounded-4 shadow"
+  alt={items[0].label}
+  loading="lazy"
+  width="520"
+  height="320"
+/>
+
           </div>
         </div>
       </div>

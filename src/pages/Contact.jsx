@@ -7,7 +7,6 @@ export default function Contact() {
       <div className="container">
         <div className="d-flex align-items-center justify-content-between mb-3">
           <h3 className="mb-0">Contact & Reservations</h3>
-          <a href="#contact" className="btn btn-primary d-none d-md-inline-flex">Reserve a Table</a>
         </div>
         <ContactForm />
       </div>

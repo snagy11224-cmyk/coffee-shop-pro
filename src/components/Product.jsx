@@ -6,8 +6,8 @@ export default function Product(){
   const product = {
     name: "Signature Latte",
     desc: "Smooth espresso blended with steamed milk, poured with care for a warm and balanced finish.",
-    price: 58, // تقدري تغيري
-    img: "/latte.jpg" // استبدليها بأي صورة من اللي حطيتيها في public
+    price: 58, 
+    img: "/latte.jpg"
   };
 
   return (
