@@ -469,3 +469,6 @@ footer .copy {
   border: none !important;
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
+.text-coffee {
+  color: #6F4E37 !important; /* warm coffee brown */
+}

@@ -37,7 +37,7 @@ export default function Header() {
             {/* Normal routes use NavLink with end */}
             <li className="nav-item">
               <NavLink to="/users" end className={({isActive}) => `nav-link${isActive ? " active" : ""}`}>
-                Users
+                Order Contacts
               </NavLink>
             </li>
             <li className="nav-item">
