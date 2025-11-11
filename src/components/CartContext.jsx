@@ -1,71 +1,70 @@
-import React, { createContext, useContext, useMemo, useReducer, useEffect } from "react";
+// src/components/CartContext.jsx
+import React, { createContext, useContext, useMemo, useReducer } from "react";
 
-const CartContext = createContext(null);
+const CartCtx = createContext(null);
+
+const initial = { items: [] };
+// item shape:
+// { id: "1-Medium", productId: 1, label, img, size, price, qty }
 
 function reducer(state, action) {
   switch (action.type) {
-    case "HYDRATE": {
-      return Array.isArray(action.items) ? action.items : [];
-    }
     case "ADD": {
-      // لو نفس المنتج ونفس الحجم موجود، زوّد الكمية
-      const idx = state.findIndex(i => i.id === action.item.id);
-      if (idx >= 0) {
-        const next = [...state];
-        next[idx] = { ...next[idx], qty: next[idx].qty + (action.item.qty ?? 1) };
-        return next;
+      const i = state.items.findIndex(x => x.id === action.payload.id);
+      if (i >= 0) {
+        const items = state.items.map((x, idx) =>
+          idx === i ? { ...x, qty: x.qty + (action.payload.qty ?? 1) } : x
+        );
+        return { ...state, items };
       }
-      return [...state, { ...action.item, qty: action.item.qty ?? 1 }];
+      return { ...state, items: [...state.items, { ...action.payload }] };
     }
-    case "REMOVE": {
-      return state.filter(i => i.id !== action.id);
+    case "INC": {
+      const items = state.items.map(x =>
+        x.id === action.id ? { ...x, qty: x.qty + 1 } : x
+      );
+      return { ...state, items };
     }
-    case "SET_QTY": {
-      return state.map(i => (i.id === action.id ? { ...i, qty: Math.max(1, action.qty) } : i));
+    case "DEC": {
+      const items = state.items
+        .map(x => (x.id === action.id ? { ...x, qty: x.qty - 1 } : x))
+        .filter(x => x.qty > 0);
+      return { ...state, items };
     }
-    case "CLEAR": {
-      return [];
-    }
+    case "REMOVE":
+      return { ...state, items: state.items.filter(x => x.id !== action.id) };
+    case "CLEAR":
+      return { ...state, items: [] };
     default:
       return state;
   }
 }
 
 export function CartProvider({ children }) {
-  const [items, dispatch] = useReducer(reducer, []);
+  const [state, dispatch] = useReducer(reducer, initial);
 
-  // hydrate from localStorage
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem("cart-items") || "[]");
-      dispatch({ type: "HYDRATE", items: saved });
-    } catch {}
-  }, []);
+  // actions with the exact names your components expect
+  const add = (item) => dispatch({ type: "ADD", payload: item });
+  const inc = (id) => dispatch({ type: "INC", id });
+  const dec = (id) => dispatch({ type: "DEC", id });
+  const remove = (id) => dispatch({ type: "REMOVE", id });
+  const clear = () => dispatch({ type: "CLEAR" });
 
-  // persist to localStorage
-  useEffect(() => {
-    localStorage.setItem("cart-items", JSON.stringify(items));
-  }, [items]);
+  const count = useMemo(
+    () => state.items.reduce((s, it) => s + it.qty, 0),
+    [state.items]
+  );
+  const total = useMemo(
+    () => state.items.reduce((s, it) => s + it.qty * it.price, 0),
+    [state.items]
+  );
 
-  const value = useMemo(() => {
-    const count = items.reduce((sum, i) => sum + i.qty, 0);
-    const total = items.reduce((sum, i) => sum + i.qty * i.price, 0);
-    return {
-      items,
-      count,
-      total,
-      add: (item) => dispatch({ type: "ADD", item }),
-      remove: (id) => dispatch({ type: "REMOVE", id }),
-      setQty: (id, qty) => dispatch({ type: "SET_QTY", id, qty }),
-      clear: () => dispatch({ type: "CLEAR" })
-    };
-  }, [items]);
-
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  const value = { items: state.items, add, inc, dec, remove, clear, count, total };
+  return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>;
 }
 
 export function useCart() {
-  const ctx = useContext(CartContext);
+  const ctx = useContext(CartCtx);
   if (!ctx) throw new Error("useCart must be used inside <CartProvider>");
   return ctx;
 }
