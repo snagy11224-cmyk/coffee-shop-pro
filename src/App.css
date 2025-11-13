@@ -119,12 +119,17 @@ h1, h2, h3, .h1, .h2, .h3 { color: var(--ink-900); }
 .navbar .navbar-brand { color: var(--ink-900); }
 .navbar .nav-link {
   color: var(--navbar-link) !important;
-  transition: color .2s ease;
+  text-decoration: none !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 .navbar .nav-link.active,
 .navbar .nav-link.show,
 .navbar .nav-link:hover {
+  text-decoration: none !important;
+  background-color: #d69e59a1; 
   color: var(--navbar-link-active) !important;
+  border-radius: 10px;
 }
 
 /* ---------- Hero ---------- */

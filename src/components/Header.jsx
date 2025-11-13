@@ -1,16 +1,11 @@
-// src/components/Header.jsx
 import React from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
-import { NavHashLink } from "react-router-hash-link";
-import { MessageOfTheDayButton } from "./MessageOfTheDayButton";
+import { Link, useLocation } from "react-router-dom";
+import { MessageOfTheDayButton } from "../components/MessageOfTheDayButton";
+
 
 export default function Header() {
   const { pathname, hash } = useLocation();
-
-  // Active rules:
-  const homeActive  = pathname === "/" && (!hash || hash === "#hero");
-  const aboutActive = pathname === "/" && hash === "#about";
-  const menuActive  = pathname === "/" && hash === "#menu";
+  const homeActive = pathname === "/" && (!hash || hash === "#hero");
 
   return (
     <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top">
@@ -27,27 +22,27 @@ export default function Header() {
 
         <div className="collapse navbar-collapse" id="mainNav">
           <ul className="navbar-nav ms-auto gap-2">
-            {/* Home: only active on "/" or "#hero" */}
+            {/* استخدمنا <a> عادية مؤقتًا لتجنب أي تعارض من مكتبة الهاش */}
             <li className="nav-item">
-              <NavHashLink smooth to="/#hero" className={`nav-link${homeActive ? " active" : ""}`}>
+              <a href="/#hero" className={`nav-link${homeActive ? " active" : ""}`}>
                 Home
-              </NavHashLink>
+              </a>
             </li>
 
-            {/* Normal routes use NavLink with end */}
             <li className="nav-item">
-              <NavLink to="/users" end className={({isActive}) => `nav-link${isActive ? " active" : ""}`}>
+              <Link to="/users" className={`nav-link${pathname==="/users" ? " active" : ""}`}>
                 Order Contacts
-              </NavLink>
+              </Link>
             </li>
+
             <li className="nav-item">
-              <NavLink to="/contact" end className={({isActive}) => `nav-link${isActive ? " active" : ""}`}>
+              <Link to="/contact" className={`nav-link${pathname==="/contact" ? " active" : ""}`}>
                 Contact
-              </NavLink>
+              </Link>
             </li>
           </ul>
 
-         <MessageOfTheDayButton className="btn-coffee ms-lg-3" />
+           <MessageOfTheDayButton className="btn-coffee ms-lg-3" /> 
         </div>
       </div>
     </nav>
